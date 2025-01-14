@@ -13,4 +13,12 @@ public class ClienteMapDao extends GenericoMapDao<Cliente> implements IClienteDa
     public Class<Cliente> getClassNome() {
         return Cliente.class;
     }
+
+    @Override
+    public void atualizarCadastro(Cliente entidadeAtualizada, Cliente entidadeAntiga) {
+        entidadeAntiga.setNome(entidadeAtualizada.getNome());
+        entidadeAntiga.setCidade(entidadeAtualizada.getCidade());
+        entidadeAntiga.setEstado(entidadeAtualizada.getEstado());
+        entidadeAntiga.setNumero(entidadeAtualizada.getNumero());
+    }
 }

@@ -5,7 +5,6 @@ import br.com.nahtanm.interfaces.generico.Observador;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public abstract class GenericoMapDao<T extends Observador> implements IGenericoDao<T> {
@@ -24,6 +23,7 @@ public abstract class GenericoMapDao<T extends Observador> implements IGenericoD
     }
 
     public abstract Class<T> getClassNome();
+    public abstract void atualizarCadastro(T entidadeAtualizada, T entidadeAntiga);
 
     @Override
     public Boolean cadastrar(T entidade) {
@@ -39,12 +39,18 @@ public abstract class GenericoMapDao<T extends Observador> implements IGenericoD
 
     @Override
     public void alterar(T entidade) {
-
+        T entidadeAtual = this.mapaInterno.get(entidade.getCodigo());
+        if(entidadeAtual != null){
+            atualizarCadastro(entidade, entidadeAtual);
+        }
     }
 
     @Override
     public void excluir(Long codigo) {
-
+        T entidade = this.mapaInterno.get(codigo);
+        if (entidade != null){
+            this.mapaInterno.remove(entidade.getCodigo(),entidade);
+        }
     }
 
     @Override

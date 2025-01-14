@@ -13,4 +13,9 @@ public class ProdutoMapDao extends GenericoMapDao<Produto> implements IProdutoDa
     public Class<Produto> getClassNome() {
         return Produto.class;
     }
+
+    @Override
+    public void atualizarCadastro(Produto entidadeAtualizada, Produto entidadeAntiga) {
+        entidadeAntiga.setNome(entidadeAtualizada.getNome());
+    }
 }
